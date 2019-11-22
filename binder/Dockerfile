@@ -1,2 +1,2 @@
-FROM uwcryo/asp-binder:f8a2752
+FROM uwcryo/asp-binder:b95c057
 
