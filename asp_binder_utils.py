@@ -65,10 +65,10 @@ def plot_stereo_results(out_folder,ax):
     plot_ar(dy_ma,ax=axa[3],clim=disp_clim,cmap=cmap_disp,label='dy (px)')
     #plt.colorbar(dx_im,axa[2])
     #plt.colorbar(dy_im,axa[3])
-    error_im = axa[4].imshow(error_ma,cmap=cmap_error,clim=get_clim(error_ma))
+    error_im = axa[4].imshow(error_ma,cmap=cmap_error,clim=get_clim(error_ma),interpolation='none')
     plot_ar(error_ma,ax=axa[4],clim=get_clim(error_ma),cmap=cmap_error,label='Intersection Error(m)')
     #plt.colorbar(error_im,ax=axa[4])
-    axa[5].imshow(hs,cmap=cmap_img,clim=get_clim(hs))
+    axa[5].imshow(hs,cmap=cmap_img,clim=get_clim(hs),interpolation='none')
     plot_ar(dem_ma,ax=axa[5],clim=get_clim(dem_ma),label='HAE (m WGS84)',alpha=0.6)
     print(get_clim(dem_ma))
     #plt.colorbar(dem_im,axa[5])
@@ -77,9 +77,9 @@ def plot_stereo_results(out_folder,ax):
     
 def plot_ar(im,ax,clim,cmap=None,label=None,cbar=True,alpha=1):
     if cmap:
-        img = ax.imshow(im,cmap=cmap,clim=clim,alpha=alpha)
+        img = ax.imshow(im,cmap=cmap,clim=clim,alpha=alpha,interpolation='none')
     else:
-        img = ax.imshow(im,clim=clim,alpha=alpha)
+        img = ax.imshow(im,clim=clim,alpha=alpha,interpolation='none')
     if cbar:
         divider = make_axes_locatable(ax)
         #cax = divider.append_axes("right", size="5%", pad=0.05)
