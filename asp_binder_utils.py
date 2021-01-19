@@ -119,7 +119,7 @@ def download_srtm(raster,outfn):
     elevation.clean()
     
     
-    def get_dem(demtype, bounds, out_fn=None, proj='EPSG:4326'):
+def get_dem(demtype, bounds, out_fn=None, proj='EPSG:4326'):
     """
     download a DEM of choice from OpenTopography World DEM
     ## first written by David Shean
@@ -160,9 +160,25 @@ def download_srtm(raster,outfn):
         if not os.path.exists(proj_fn):
             output_res = 30
             gdalwarp = find_executable('gdalwarp')
-            gdalwarp_call = f'{gdalwarp} -r cubic -co COMPRESS=LZW -co TILED=YES -co BIGTIFF=IF_SAFER -tr {output_res} {output_res} -t_srs {proj} {out_fn} {proj_fn}'
+            gdalwarp_call = f"{gdalwarp} -r cubic -co COMPRESS=LZW -co TILED=YES -co BIGTIFF=IF_SAFER -tr {output_res} {output_res} -t_srs '{proj}' {out_fn} {proj_fn}"
+            print(gdalwarp_call)
             run_bash_command(gdalwarp_call)
         out_DEM = proj_fn
     else:
         out_DEM = out_fn
     return out_DEM
+
+def run_bash_command(cmd):
+    #written by Scott Henderson
+    # move to asp_binder_utils
+    """Call a system command through the subprocess python module."""
+    print(cmd)
+    try:
+        retcode = subprocess.call(cmd, shell=True)
+        if retcode < 0:
+            print("Child was terminated by signal", -retcode, file=sys.stderr)
+        else:
+            print("Child returned", retcode, file=sys.stderr)
+    except OSError as e:
+        print("Execution failed:", e, file=sys.stderr)
+
