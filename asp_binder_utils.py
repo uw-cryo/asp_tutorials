@@ -154,6 +154,11 @@ def get_dem(demtype, bounds, apikey, out_fn=None, proj='EPSG:4326'):
         #Get
         response = requests.get(url)
         #Check for 200
+        if response.ok:
+            print ('OK!')
+        else:
+            print ('Query failed')
+            sys.exit()
         #Write to disk
         open(out_fn, 'wb').write(response.content)
     if proj != 'EPSG:4326':
