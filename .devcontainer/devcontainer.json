@@ -4,11 +4,12 @@
     "cpus": 4
   },
   "postCreateCommand": "",
+  "remoteEnv": {
+    "PATH": "${localEnv:PATH}:/srv/StereoPipeline/bin"
+  },
   "customizations": {
     "codespaces": {
-      "openFiles": [      
-        "README.md",
-        "example-aster_on_pangeo_binder_draft.ipynb"]
+      "openFiles": []
     },
     "vscode": {
       "extensions": [
