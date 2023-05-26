@@ -1,8 +1,9 @@
 # asp-binder demo
 
-launch ames stereo pipeline on binderhubs
+Launch a preconfigured computing environment with example notebooks for [Ames Stereo Pipeline](ASP) on [BinderHub](https://mybinder.org) or [GitHub Codespaces](https://github.com/features/codespaces)
 
-uses image built by https://github.com/uw-cryo/asp-binder (see `binder` branch of this repo)
+### Launch on GitHub Codespaces
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/uw-cryo/asp-binder-demo?quickstart=1)
 
 ### Launch on Mybinder.org
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uw-cryo/asp-binder-demo/binder?urlpath=git-pull?repo=https://github.com/uw-cryo/asp-binder-demo%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/asp-binder-demo/example.ipynb/%3Fautodecode)
