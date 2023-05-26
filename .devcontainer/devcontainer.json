@@ -1,5 +1,20 @@
 {
   "image": "docker.io/uwcryo/asp-binder:8940d7185b78",
-  "features": {
+  "hostRequirements": {
+    "cpus": 4
+  },
+  "postCreateCommand": "",
+  "customizations": {
+    "codespaces": {
+      "openFiles": [      
+        "README.md",
+        "example-aster_on_pangeo_binder_draft.ipynb"]
+    },
+    "vscode": {
+      "extensions": [
+        "ms-toolsai.jupyter",
+        "ms-python.python"
+      ]
+    }
   }
 }
