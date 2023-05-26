@@ -5,7 +5,9 @@ Launch a preconfigured computing environment with example notebooks for [Ames St
 ### Launch on GitHub Codespaces
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/uw-cryo/asp-binder-demo?quickstart=1)
 
-☝️ this button will launch an Cloud-hosted computer on Microsoft Azure with a VSCode interface. GitHub currently gives every user [120 vCPU hours per month for free](https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts), beyond that you must pay. So be sure to explicitly stop or shut down your codespace when you are done by going to this page (https://github.com/codespaces/). 
+☝️ this button will launch an Cloud-hosted computer on Microsoft Azure with a VSCode interface. GitHub currently gives every user [120 vCPU hours per month for free](https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts), beyond that you must pay. **So be sure to explicitly stop or shut down your codespace when you are done by going to this page (https://github.com/codespaces/).**
+
+* More details on codespace lifecycle is explained [here](https://docs.github.com/en/codespaces/getting-started/the-codespace-lifecycle#). 
 
 ### Launch on Mybinder.org
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uw-cryo/asp-binder-demo/binder?urlpath=git-pull?repo=https://github.com/uw-cryo/asp-binder-demo%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/asp-binder-demo/example.ipynb/%3Fautodecode)
