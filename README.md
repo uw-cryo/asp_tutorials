@@ -17,8 +17,8 @@ Launch a preconfigured computing environment with example notebooks for [Ames St
 ### Usage
 Once launched, open the example-aster\_on\_pangeo\_binder\_demo.ipynb from the left directory panel and run the cells to execute the interactive tutorial.
 
-### Sample L1A stereo 
+### Sample L1A ASTER stereo images 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7972223.svg)](https://doi.org/10.5281/zenodo.7972223)
-* The tutorial uses an Aster Stereo collected over Mt. Rainier, WA on July 31st 2017. 
-* The sample data was downloaded from the [NASA EarthData website](https://www.earthdata.nasa.gov/).
-* We have hosted the data on zenodo, which is downloaded on the fly during the tutorial.
+* The tutorial uses sample L1A stereo images acquired by the ASTER instrument over Mt. Rainier, WA on July 31, 2017 (AST_L1A_00307312017190728_20200218153629_19952.zip)
+* More details can be found on the data product page: https://lpdaac.usgs.gov/products/ast_l1av003/
+* The sample data were downloaded from the [NASA EarthData website](https://www.earthdata.nasa.gov/). We are rehosting on Zenodo to enable on-demand access to the sample images when running the tutorial.
