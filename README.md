@@ -22,3 +22,7 @@ Once launched, open the example-aster\_on\_pangeo\_binder\_demo.ipynb from the l
 * The tutorial uses sample L1A stereo images acquired by the ASTER instrument over Mt. Rainier, WA on July 31, 2017 (AST_L1A_00307312017190728_20200218153629_19952.zip)
 * More details can be found on the data product page: https://lpdaac.usgs.gov/products/ast_l1av003/
 * The sample data were downloaded from the [NASA EarthData website](https://www.earthdata.nasa.gov/). We are rehosting on Zenodo to enable on-demand access to the sample images when running the tutorial.
+
+### Example output
+![Example DEM produced from the ASTEER tutorial](./assets/images/asp_aster_output_plot.jpg)
+Figure: Example output DEM produced from ASTER imagery acquired over Mt. Rainier. Top Row: Orthorectified A) left  and B) right stereo images. Middle Row: Disparity in C) x (E-W) and D) y (N-S) direction. Bottom Row: E) Intersection error and F) Digital Elevation Model.
