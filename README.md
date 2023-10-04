@@ -10,8 +10,7 @@ Launch a preconfigured computing environment with interactive example notebooks 
 * More details on codespace lifecycle is explained [here](https://docs.github.com/en/codespaces/getting-started/the-codespace-lifecycle#). 
 
 ### Launch on Mybinder.org
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uw-cryo/asp_tutorials/binder?urlpath=git-pull?repo=https://github.com/uw-cryo/asp_tutorials%26amp%3Bbranch=master%26amp%3Burlpath=lab/tree/asp_tutorials/example-aster_stereo_reconstruction.ipynb/%3Fautodecode)
-
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uw-cryo/asp_tutorials/master?labpath=tutorials%2Fexample-aster_stereo_reconstruction.ipynb)
 ☝️ this button will launch an *ephemeral* Cloud-hosted computer with a JupyterLab interface that is convenient for demos. The computing cost is graciously supported by the scientific community (https://binderhub.readthedocs.io/en/stable/federation/federation.html) but you do not have control over computing resources (which are typically limited to 2vCPU and 4GB RAM), and files are not saved between sessions.
 
 ### Usage
