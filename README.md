@@ -1,6 +1,9 @@
-# asp-tutorials
+# asp_tutorials
 
 Launch a preconfigured computing environment with interactive example notebooks for [Ames Stereo Pipeline](ASP) processing on [BinderHub](https://mybinder.org) or [GitHub Codespaces](https://github.com/features/codespaces)
+
+## Development Status
+This repository is under active development; we will be adding tutorials for different ASP processing capabilities, and for different Earth and Planetary datasets. Stay tuned!! Community feedback is welcomed through github issues :D 
 
 ### Launch on GitHub Codespaces (preferred way)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/uw-cryo/asp_tutorials?quickstart=1)
@@ -14,7 +17,8 @@ Launch a preconfigured computing environment with interactive example notebooks 
 ☝️ this button will launch an *ephemeral* Cloud-hosted computer with a JupyterLab interface that is convenient for demos. The computing cost is graciously supported by the scientific community (https://binderhub.readthedocs.io/en/stable/federation/federation.html) but you do not have control over computing resources (which are typically limited to 2vCPU and 4GB RAM), and files are not saved between sessions.
 
 ### Usage
-Once launched, open the example-aster\_on\_pangeo\_binder\_demo.ipynb from the left directory panel and run the cells to execute the interactive tutorial.
+Once the codespace is launched, navigate to the tutorials folder from the file Explorer on the left of your codespace screen, and open the `example-aster\_stereo\_reconstruction.ipynb` notebook and run the cells to execute the interactive tutorial. 
+
 
 ### Sample L1A ASTER stereo images 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7972223.svg)](https://doi.org/10.5281/zenodo.7972223)
