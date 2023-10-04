@@ -3,7 +3,7 @@
 Launch a preconfigured computing environment with example notebooks for [Ames Stereo Pipeline](ASP) on [BinderHub](https://mybinder.org) or [GitHub Codespaces](https://github.com/features/codespaces)
 
 ### Launch on GitHub Codespaces
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/uw-cryo/asp-binder-demo?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/uw-cryo/asp_tutorials?quickstart=1)
 
 ☝️ this button will launch an Cloud-hosted computer on Microsoft Azure with a VSCode interface. GitHub currently gives every user [120 vCPU hours per month for free](https://docs.github.com/en/billing/managing-billing-for-github-codespaces/about-billing-for-github-codespaces#monthly-included-storage-and-core-hours-for-personal-accounts), beyond that you must pay. **So be sure to explicitly stop or shut down your codespace when you are done by going to this page (https://github.com/codespaces/).**
 
