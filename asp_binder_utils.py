@@ -176,17 +176,20 @@ def get_dem(demtype, bounds, apikey, out_fn=None, proj='EPSG:4326'):
         out_DEM = out_fn
     return out_DEM
 
-def run_bash_command(cmd):
+def run_bash_command(cmd,verbose=False):
     #written by Scott Henderson
     # move to asp_binder_utils
     """Call a system command through the subprocess python module."""
     print(cmd)
     try:
-        retcode = subprocess.call(cmd, shell=True)
+        if verbose:
+            retcode = subprocess.call(cmd,shell=True)
+        else:
+            retcode = subprocess.call(cmd, stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT,shell=True)
         if retcode < 0:
             print("Child was terminated by signal", -retcode, file=sys.stderr)
         else:
             print("Child returned", retcode, file=sys.stderr)
     except OSError as e:
         print("Execution failed:", e, file=sys.stderr)
-
