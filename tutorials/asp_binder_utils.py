@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import stats 
 import os,sys,glob
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -85,8 +86,8 @@ def plot_ar(im,ax,clim,cmap=None,label=None,cbar=True,alpha=1):
         divider = make_axes_locatable(ax)
         #cax = divider.append_axes("right", size="5%", pad=0.05)
         #cax = divider.append_axes("right", size="5%", pad="2%")
-        cax = divider.append_axes("right", size="2%", pad="1%")
-        cb = plt.colorbar(img,cax=cax,ax=ax)
+        cax = divider.append_axes("right", size="2%", pad="1.5%")
+        cb = plt.colorbar(img,cax=cax,ax=ax,extend='both')
         cax.set_ylabel(label)
     ax.set_xticks([])
     ax.set_yticks([])
@@ -193,3 +194,59 @@ def run_bash_command(cmd,verbose=False):
             print("Child returned", retcode, file=sys.stderr)
     except OSError as e:
         print("Execution failed:", e, file=sys.stderr)
+
+def plot_alignment_maps(refdem,src_dem,initial_elevation_difference_fn,aligned_elevation_difference_fn):
+    f,ax = plt.subplots(2,2,figsize=(8,6))
+    axa = ax.ravel()
+
+    refdem_ma = fn_2_ma(refdem,1)
+    src_dem_ma = fn_2_ma(src_dem)
+    initial_diff = fn_2_ma(initial_elevation_difference_fn)
+    final_diff = fn_2_ma(aligned_elevation_difference_fn)
+
+    refdem_ds = gdal.Open(refdem)
+    producttype = 'hillshade'
+    ref_hs_ds = gdal.DEMProcessing('',refdem_ds,producttype,format='MEM')
+    ref_hs = ref_hs_ds.ReadAsArray()
+
+    src_dem_ds = gdal.Open(src_dem)
+    producttype = 'hillshade'
+    src_hs_ds = gdal.DEMProcessing('',src_dem_ds,producttype,format='MEM')
+    src_hs = src_hs_ds.ReadAsArray()
+    #fig,ax = plt.subplots(3,2,figsize=(6,5))
+    axa = ax.ravel()
+    cmap_diff = 'RdBu'
+    cmap_hs = 'gray'
+    axa[0].imshow(ref_hs,cmap=cmap_hs,clim=get_clim(ref_hs),interpolation='none')
+    plot_ar(refdem_ma,ax=axa[0],clim=get_clim(refdem_ma),label='Elevation (m WGS84)',alpha=0.6)
+    axa[0].set_title('Reference DEM')
+
+    axa[1].imshow(src_hs,cmap=cmap_hs,clim=get_clim(src_hs),interpolation='none')
+    plot_ar(src_dem_ma,ax=axa[1],clim=get_clim(src_dem_ma),label='Elevation (m WGS84)',alpha=0.6)
+    axa[1].set_title('Source DEM')
+
+    diff_clim = find_common_clim(initial_diff,final_diff)
+    plot_ar(initial_diff,ax=axa[2],clim=diff_clim,cmap=cmap_diff,label=' Elevation difference (m)')
+    axa[2].set_title("Before alignment")
+
+    plot_ar(final_diff,ax=axa[3],clim=diff_clim,cmap=cmap_diff,label='Elevation difference (m)')
+    axa[3].set_title("After alignment")
+    plt.tight_layout()
+
+    f2,ax2 = plt.subplots()
+    bins = np.linspace(diff_clim[0],diff_clim[1], 128)
+    initial_mad = stats.median_abs_deviation(initial_diff.compressed())
+    initial_med = np.median(initial_diff.compressed())
+
+    final_mad = stats.median_abs_deviation(final_diff.compressed())
+    final_med = np.median(final_diff.compressed())
+
+    title = f" Pre-alignment elev. diff. med: {initial_med: .2f} m, mad: {initial_mad: .2f} m\nPost-alignment elev. diff. med: {final_med: .2f} m, mad: {final_mad: .2f} m"
+    
+    ax2.hist(initial_diff.compressed(),bins=bins,color='blue',alpha=0.5,label='Initial')
+    ax2.hist(final_diff.compressed(),bins=bins,color='green',alpha=0.5,label='Final')
+    ax2.axvline(x=0,linestyle='--',linewidth=1,color='k')
+    ax2.legend()
+    ax2.set_xlabel('Elevation difference')
+    ax2.set_ylabel('#pixels')
+    ax2.set_title(title)
