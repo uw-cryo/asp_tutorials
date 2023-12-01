@@ -241,7 +241,7 @@ def plot_alignment_maps(refdem,src_dem,initial_elevation_difference_fn,aligned_e
     final_mad = stats.median_abs_deviation(final_diff.compressed())
     final_med = np.median(final_diff.compressed())
 
-    title = f" Pre-alignment elev. diff. med: {initial_med: .2f} m, mad: {initial_mad: .2f} m\nPost-alignment elev. diff. med: {final_med: .2f} m, mad: {final_mad: .2f} m"
+    title = f" Pre-alignment elev. diff. median: {initial_med: .2f} m, mad: {initial_mad: .2f} m\nPost-alignment elev. diff. median: {final_med: .2f} m, mad: {final_mad: .2f} m"
     
     ax2.hist(initial_diff.compressed(),bins=bins,color='blue',alpha=0.5,label='Initial')
     ax2.hist(final_diff.compressed(),bins=bins,color='green',alpha=0.5,label='Final')
