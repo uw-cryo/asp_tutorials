@@ -12,6 +12,9 @@
       "openFiles": []
     },
     "vscode": {
+      "settings": { 
+				"python.defaultInterpreterPath": "/srv/conda/envs/notebook/bin/python"
+      }
       "extensions": [
         "ms-toolsai.jupyter",
         "ms-python.python"
