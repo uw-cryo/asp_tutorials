@@ -1,6 +1,6 @@
 # asp_tutorials
 
-Launch a preconfigured computing environment with interactive example notebooks for [Ames Stereo Pipeline](ASP) processing on [BinderHub](https://mybinder.org) or [GitHub Codespaces](https://github.com/features/codespaces)
+Launch a preconfigured computing environment with interactive example notebooks for [Ames Stereo Pipeline](ASP) processing on [GitHub Codespaces](https://github.com/features/codespaces)
 
 ## Development Status
 This repository is under active development; we will be adding tutorials for different ASP processing capabilities, and for different Earth and Planetary datasets. Stay tuned!! Community feedback is welcomed through github issues :D 
@@ -12,12 +12,8 @@ This repository is under active development; we will be adding tutorials for dif
 
 * More details on codespace lifecycle is explained [here](https://docs.github.com/en/codespaces/getting-started/the-codespace-lifecycle#). 
 
-### Launch on Mybinder.org
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/uw-cryo/asp_tutorials/master?labpath=tutorials%2Fexample-aster_stereo_reconstruction.ipynb)
-☝️ this button will launch an *ephemeral* Cloud-hosted computer with a JupyterLab interface that is convenient for demos. The computing cost is graciously supported by the scientific community (https://binderhub.readthedocs.io/en/stable/federation/federation.html) but you do not have control over computing resources (which are typically limited to 2vCPU and 4GB RAM), and files are not saved between sessions.
-
 ### Usage
-Once the codespace is launched, navigate to the tutorials folder from the file Explorer on the left of your codespace screen, and open the `example-aster\_stereo\_reconstruction.ipynb` notebook and run the cells to execute the interactive tutorial. 
+Once the codespace is launched, navigate to the tutorials folder from the file Explorer on the left of your codespace screen, and open the `example-aster_stereo_reconstruction.ipynb` notebook and run the cells to execute the interactive tutorial. 
 
 
 ### Sample L1A ASTER stereo images 
