@@ -1,1 +1,1 @@
-FROM uwcryo/asp-binder:66c5713c9116
+FROM uwcryo/asp-binder:c305ac4947c4
