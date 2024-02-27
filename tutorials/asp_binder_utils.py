@@ -26,7 +26,7 @@ def fn_2_ma(fn,b=1):
     ds = rasterio.open(fn)
     ar = ds.read(b)
     ndv = get_ndv(ds)
-    ma_ar = np.ma.masked_less_equal(ar,ndv)
+    ma_ar = np.ma.masked_equal(ar,ndv)
     return ma_ar
 def get_ndv(ds):
     no_data = ds.nodatavals[0]
@@ -41,7 +41,7 @@ def plot_stereo_results(out_folder,ax):
     dem = glob.glob(out_folder+'*-DEM.tif')[0]
     l_img = glob.glob(out_folder+'*L.tif')[0]
     r_img = glob.glob(out_folder+'*R.tif')[0]
-    disp = glob.glob(out_folder+'*F.tif')[0]
+    disp = glob.glob(out_folder+'*-F.tif')[0]
     error_fn = glob.glob(out_folder+'*In*.tif')[0]
     print("Found files {}\n {}\n {}\n {}\n {}\n".format(l_img,r_img,disp,error_fn,dem))
     dem_ma = fn_2_ma(dem,1)
@@ -60,28 +60,33 @@ def plot_stereo_results(out_folder,ax):
     cmap_disp = 'RdBu'
     cmap_error = 'inferno'
     plot_ar(l_img_ma,ax=axa[0],clim=get_clim(l_img_ma),cbar=False,cmap=cmap_img)
-    print(get_clim(l_img_ma))
+    #print(get_clim(l_img_ma))
     plot_ar(l_img_ma,ax=axa[1],clim=get_clim(r_img_ma),cbar=False,cmap=cmap_img)
     disp_clim = find_common_clim(dx_ma,dy_ma)
     plot_ar(dx_ma,ax=axa[2],clim=disp_clim,cmap=cmap_disp,label='dx (px)')
     plot_ar(dy_ma,ax=axa[3],clim=disp_clim,cmap=cmap_disp,label='dy (px)')
     #plt.colorbar(dx_im,axa[2])
     #plt.colorbar(dy_im,axa[3])
-    error_im = axa[4].imshow(error_ma,cmap=cmap_error,clim=get_clim(error_ma),interpolation='none')
+    #error_im = axa[4].imshow(error_ma,cmap=cmap_error,clim=get_clim(error_ma),interpolation='none')
     plot_ar(error_ma,ax=axa[4],clim=get_clim(error_ma),cmap=cmap_error,label='Intersection Error(m)')
     #plt.colorbar(error_im,ax=axa[4])
     axa[5].imshow(hs,cmap=cmap_img,clim=get_clim(hs),interpolation='none')
     plot_ar(dem_ma,ax=axa[5],clim=get_clim(dem_ma),label='HAE (m WGS84)',alpha=0.6)
-    print(get_clim(dem_ma))
+    #print(get_clim(dem_ma))
     #plt.colorbar(dem_im,axa[5])
     plt.tight_layout()
-    print(type(dem_ma))
+    #print(type(dem_ma))
+    for idx,axa in enumerate(ax.ravel()):
+        if idx == 4:
+            axa.set_facecolor('gray')
+        else:
+            axa.set_facecolor('k')
     
 def plot_ar(im,ax,clim,cmap=None,label=None,cbar=True,alpha=1):
     if cmap:
-        img = ax.imshow(im,cmap=cmap,clim=clim,alpha=alpha,interpolation='none')
+        img = ax.imshow(im,cmap=cmap,clim=clim,alpha=alpha,interpolation='None')
     else:
-        img = ax.imshow(im,clim=clim,alpha=alpha,interpolation='none')
+        img = ax.imshow(im,clim=clim,alpha=alpha,interpolation='None')
     if cbar:
         divider = make_axes_locatable(ax)
         #cax = divider.append_axes("right", size="5%", pad=0.05)
