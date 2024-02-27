@@ -1,5 +1,5 @@
 {
-  "image": "docker.io/uwcryo/asp-binder:c305ac4947c4",
+  "image": "docker.io/uwcryo/asp-binder:63fa29f5df5d",
   "hostRequirements": {
     "cpus": 4
   },
