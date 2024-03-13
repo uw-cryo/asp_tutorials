@@ -1,11 +1,15 @@
 import numpy as np
+import pandas as pd
 from scipy import stats 
 import os,sys,glob
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import rasterio
 from osgeo import gdal
+import geopandas as gpd
+import contextily as ctx
 from pyproj import Proj, transform
+
 import subprocess
 
 
@@ -186,5 +190,86 @@ def plot_alignment_maps(refdem,src_dem,initial_elevation_difference_fn,aligned_e
     ax2.axvline(x=0,linestyle='--',linewidth=1,color='k')
     ax2.legend()
     ax2.set_xlabel('Elevation difference')
+    ax2.set_ylabel('#pixels')
+    ax2.set_title(title)
+
+def read_geodiff(csv_fn):
+    #from David Shean
+    resid_cols=['lon', 'lat', 'diff']
+    resid_df = pd.read_csv(csv_fn, comment='#', names=resid_cols)
+    resid_gdf = gpd.GeoDataFrame(resid_df, geometry=gpd.points_from_xy(resid_df['lon'], resid_df['lat'], crs='EPSG:4326'))
+    return resid_gdf
+
+def plot_alignment_maps_altimetry(reference_altimetry,src_dem,initial_elevation_difference_fn,
+                        aligned_elevation_difference_fn,plot_crs,provider=ctx.providers.Esri.WorldImagery,diff_clim=(-5,5)):
+    f,ax = plt.subplots(2,2,figsize=(8,6))
+    axa = ax.ravel()
+    markersize = 1
+    #ref_alitmetry_gdf = gpd.read_file(reference_altimetry)
+    src_dem_ma = fn_2_ma(src_dem)
+    initial_diff = read_geodiff(initial_elevation_difference_fn)
+    final_diff = read_geodiff(aligned_elevation_difference_fn)
+    
+    # change point file crs
+    initial_diff = initial_diff.to_crs(plot_crs)
+    final_diff = final_diff.to_crs(plot_crs)
+    reference_altimetry = reference_altimetry.to_crs(plot_crs)
+    
+    src_dem_ds = gdal.Open(src_dem)
+    producttype = 'hillshade'
+    src_hs_ds = gdal.DEMProcessing('',src_dem_ds,producttype,format='MEM')
+    src_hs = src_hs_ds.ReadAsArray()
+    #fig,ax = plt.subplots(3,2,figsize=(6,5))
+    axa = ax.ravel()
+    cmap_diff = 'RdBu'
+    cmap_hs = 'gray'
+    if len(reference_altimetry)>10000:
+        reference_altimetry.sample(10000).plot('h_mean',ax=axa[0])
+        ctx.add_basemap(ax=axa[0],crs="EPSG:4326",attribution=False,source=provider)
+    else:
+        reference_altimetry.plot(column='h_mean',ax=axa[0],markersize=markersize)
+    ctx.add_basemap(ax=axa[0],crs=plot_crs,attribution=False,source=provider)
+    axa[0].set_title('Reference ICESat-2 altimetry points')
+
+    axa[1].imshow(src_hs,cmap=cmap_hs,clim=get_clim(src_hs),interpolation='none')
+    plot_ar(src_dem_ma,ax=axa[1],clim=get_clim(src_dem_ma),label='Elevation (m WGS84)',alpha=0.6)
+    axa[1].set_title('Source DEM')
+
+    ## Difference maps
+
+    initial_diff.plot(column='diff',ax=axa[2],cmap='RdBu',vmin=diff_clim[0],vmax=diff_clim[1],markersize=markersize)
+    final_diff.plot(column='diff',ax=axa[3],cmap='RdBu',vmin=diff_clim[0],vmax=diff_clim[1],markersize=markersize)   
+    axa[2].set_title("Before alignment")
+    axa[3].set_title("After alignment")
+    ctx.add_basemap(ax=axa[2],crs=plot_crs,attribution=False,
+                    source = provider)
+    ctx.add_basemap(ax=axa[3],crs=plot_crs,attribution=False,
+                    source = provider)
+    axa[0].set_xticks([])
+    axa[2].set_xticks([])
+    axa[3].set_xticks([])
+
+    axa[0].set_yticks([])
+    axa[2].set_yticks([])
+    axa[3].set_yticks([])
+
+    
+    plt.tight_layout()
+
+    f2,ax2 = plt.subplots()
+    bins = np.linspace(diff_clim[0],diff_clim[1], 128)
+    initial_mad = stats.median_abs_deviation(initial_diff['diff'].values)
+    initial_med = np.median(initial_diff['diff'].values)
+
+    final_mad = stats.median_abs_deviation(final_diff['diff'].values)
+    final_med = np.median(final_diff['diff'].values)
+
+    title = f" Pre-alignment elev. diff. median: {initial_med: .2f} m, mad: {initial_mad: .2f} m\nPost-alignment elev. diff. median: {final_med: .2f} m, mad: {final_mad: .2f} m"
+    
+    ax2.hist(initial_diff['diff'].values,bins=bins,color='blue',alpha=0.5,label='Initial')
+    ax2.hist(final_diff['diff'].values,bins=bins,color='green',alpha=0.5,label='Final')
+    ax2.axvline(x=0,linestyle='--',linewidth=1,color='k')
+    ax2.legend()
+    ax2.set_xlabel('Elevation difference (m)')
     ax2.set_ylabel('#pixels')
     ax2.set_title(title)
