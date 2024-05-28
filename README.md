@@ -9,9 +9,9 @@ Interactive tutorials for [Ames Stereo Pipeline (ASP)](https://stereopipeline.re
 ### Usage
 Once the codespace is launched, navigate to the tutorials folder from the file Explorer on the left of your codespace screen, and open the `example-aster_stereo_reconstruction.ipynb` notebook and run the cells to execute the interactive tutorial. 
 ## Table of Contents
-* [Using ASP to process ASTER Stereo Imagery](tutorials/example-aster_stereo_reconstruction.ipynb)
-* [Aligning two Digital Elevation Models or point clouds](tutorials/example-dem_coregistration.ipynb)
-* [Aligning a Digital Elevation Model to sparse altimetry point-cloud](tutorials/example-dem_altimetry_coregistration.ipynb)
+* [Using ASP to process ASTER Stereo Imagery](https://nbviewer.org/github/uw-cryo/asp_tutorials/blob/master/tutorials/example-aster_stereo_reconstruction.ipynb)
+* [Aligning two Digital Elevation Models or point clouds](https://nbviewer.org/github/uw-cryo/asp_tutorials/blob/master/tutorials/example-dem_coregistration.ipynb)
+* [Aligning a Digital Elevation Model to sparse altimetry point-cloud](https://nbviewer.org/github/uw-cryo/asp_tutorials/blob/master/tutorials/example-dem_altimetry_coregistration.ipynb)
 
 #### Sample L1A ASTER stereo images 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7972223.svg)](https://doi.org/10.5281/zenodo.7972223)
